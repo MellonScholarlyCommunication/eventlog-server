@@ -1,0 +1,23 @@
+{
+  "@context": [
+    "https://www.w3.org/ns/activitystreams",
+    {
+      "schema": "https://schema.org/"
+    }
+  ],
+  "id": "urn:uuid:798340DE-3534-459D-AD63-2663C619C6D4",
+  "type": "Announce",
+  "actor": {
+    "id": "http://193.190.80.48:56633/service/e/profile/card#us",
+    "inbox": "http://193.190.80.48:56633/service/e/inbox/",
+    "type": "Organization"
+  },
+  "context": "http://193.190.80.48:56633/service/r/artifacts/artifact1.html",
+  "object": {
+    "id": "http://193.190.80.48:56633/service/e/events/http://localhost:8000/review.html",
+    "type": [
+      "Document",
+      "schema:Review"
+    ]
+  }
+}

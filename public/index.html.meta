@@ -1,0 +1,4 @@
+{
+    "Content-Type": "text/html",
+    "Link-Template": "\"https://labs.eventnotifications.net/service/e/events/{url}.log\" ; rel=\"eventlog\""
+}

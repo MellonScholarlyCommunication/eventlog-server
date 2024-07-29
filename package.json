@@ -1,0 +1,13 @@
+{
+  "name": "eventlog-server",
+  "version": "1.0.0",
+  "description": "An eventlog server",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "mellon-server": "^1.0.8"
+  },
+  "scripts": {
+    "server": "mellon-server"
+  }
+}
