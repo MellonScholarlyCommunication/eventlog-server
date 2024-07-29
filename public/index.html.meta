@@ -1,4 +1,6 @@
 {
     "Content-Type": "text/html",
-    "Link-Template": "\"http://193.190.80.48:56633/service/e/events/{url}.log\" ; rel=\"eventlog\""
+    "Link-Template": "\"http://193.190.80.48:56633/service/e/events/{url}.log\" ; rel=\"eventlog\"",
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Expose-Headers": "Link, Link-Template"
 }
