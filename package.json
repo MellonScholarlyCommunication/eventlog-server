@@ -2,12 +2,23 @@
   "name": "eventlog-server",
   "version": "1.0.0",
   "description": "An eventlog server",
-  "main": "index.js",
+  "main": "lib/index.js",
   "license": "MIT",
   "dependencies": {
-    "mellon-server": "^1.0.8"
+    "chalk": "2.4.2",
+    "commander": "^12.1.0",
+    "dotenv": "^16.4.5",
+    "log4js": "^6.9.1",
+    "mellon-server": "^1.1.0",
+    "postgres": "^3.4.4"
+  },
+  "bin": {
+    "event_admin": "./bin/event_admin.js"
   },
   "scripts": {
-    "server": "mellon-server"
+    "server": "mellon-server",
+    "db-start": "docker compose -f compose.yaml up -d",
+    "db-stop": "docker compose -f compose.yaml down",
+    "db-shell": "docker exec -it db psql -U postgres"
   }
 }
