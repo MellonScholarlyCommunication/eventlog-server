@@ -77,14 +77,39 @@ async function resolveEvent(id) {
 
 async function resolveEventLog(url) {
     logger.debug(`resolveEventLog(${url})`);
-    try {
-        const events = await cache.listCache(`object.id=${url}`);
 
-        if (events.length == 0) {
-            return null;
+    try {
+        let latest;
+
+        // Add here a hack to find the latest trace based on a metadata offer
+        if (url === 'latest') {
+            const events = await cache.listCache(`type=Offer`);
+        
+            if (events.length == 0) {
+                return null;
+            }
+
+            const context = await cache.getCacheContext(events.at(-1));
+
+            if (!context) {
+                return null;
+            }
+
+            latest = context.original;
+        }
+        else {
+            const events = await cache.listCache(`object.id=${url}`);
+
+            if (events.length == 0) {
+                return null;
+            }
+
+            latest = events.at(-1);
         }
 
-        const latest = events.at(-1);
+        if (! latest) {
+            return null;
+        }
 
         const related = await cache.listCache('',`original=${latest}`);
 
