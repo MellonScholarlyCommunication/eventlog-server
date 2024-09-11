@@ -9,14 +9,15 @@
     "commander": "^12.1.0",
     "dotenv": "^16.4.5",
     "log4js": "^6.9.1",
-    "mellon-server": "^1.1.0",
-    "postgres": "^3.4.4"
+    "mellon-server": "^1.1.2",
+    "postgres": "^3.4.4",
+    "url": "^0.11.4"
   },
   "bin": {
     "event_admin": "./bin/event_admin.js"
   },
   "scripts": {
-    "server": "mellon-server",
+    "server": "npx mellon-server --registry config/registry.json5",
     "db-start": "docker compose -f compose.yaml up -d",
     "db-stop": "docker compose -f compose.yaml down",
     "db-shell": "docker exec -it db psql -U postgres"

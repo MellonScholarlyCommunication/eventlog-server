@@ -1,0 +1,7 @@
+[
+    { 
+        "path": "trace[\/]?.*" , 
+        "do": "./handler/tracelog.js" , 
+        "with": { "test": 123 }
+    }
+]
