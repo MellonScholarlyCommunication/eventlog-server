@@ -83,19 +83,13 @@ async function resolveEventLog(url) {
 
         // Add here a hack to find the latest trace based on a metadata offer
         if (url === 'latest') {
-            const events = await cache.listCache(`type=Offer`);
+            const events = await cache.listCache('','original=NULL');
         
             if (events.length == 0) {
                 return null;
             }
 
-            const context = await cache.getCacheContext(events.at(-1));
-
-            if (!context) {
-                return null;
-            }
-
-            latest = context.original;
+            latest = events.at(-1);
         }
         else {
             const events = await cache.listCache(`object.id=${url}`);

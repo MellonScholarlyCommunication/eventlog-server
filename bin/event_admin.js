@@ -82,7 +82,8 @@ program
             }
         }
         else {
-            const list = await cache.listCache();
+            const list = await cache.listCache('','original=NULL');
+
             for (let i = 0 ; i < list.length ; i++) {
                 await summaryFor(list[i]);
             }
