@@ -12,6 +12,7 @@ async function handle(req,res,options) {
     }
 
     res.setHeader('Content-Type','application/ls+json');
+    res.setHeader('Access-Control-Allow-Origin','*');
 
     if (! artifact) {
         res.writeHead(404);
@@ -52,6 +53,7 @@ async function handleEvent(req,res,options) {
     const event = await resolveEvent(id);
     
     res.setHeader('Content-Type','application/ls+json');
+    res.setHeader('Access-Control-Allow-Origin','*');
 
     if (! event) {
         res.writeHead(404);
