@@ -1,6 +1,7 @@
 const url = require('url');
 const cache = require('../lib');
 const logger = require('../lib/util').getLogger();
+const md5 = require('md5');
 
 async function handle(req,res,options) {
     const parsedUrl = url.parse(req.url,true);
@@ -11,7 +12,7 @@ async function handle(req,res,options) {
         return handleEvent(req,res,options);
     }
 
-    res.setHeader('Content-Type','application/ls+json');
+    res.setHeader('Content-Type','application/ld+json');
     res.setHeader('Access-Control-Allow-Origin','*');
 
     if (! artifact) {
@@ -37,8 +38,17 @@ async function handle(req,res,options) {
     };
 
     for (let i = 0 ; i < events.length ; i++) {
+        const event = events[i];
+        const context = await cache.getCacheContext(event.id);
+        const checksum = md5(makeEvent(event));
         traceLog.member.push({
-            id: `${process.env.EVENTLOG_BASEURL}${parsedUrl.pathname}/${events[i].id}`
+            id: `${process.env.EVENTLOG_BASEURL}${parsedUrl.pathname}/${event.id}` ,
+            created: context.updated,
+            checksum: {
+                type: "Checksum",
+                algorithm: "spdx:checksumAlgorithm_md5",
+                checksumValue: checksum
+            }
         });
     }
 
@@ -62,7 +72,11 @@ async function handleEvent(req,res,options) {
     }
 
     res.writeHead(200);
-    res.end(JSON.stringify(event));
+    res.end(makeEvent(event));
+}
+
+function makeEvent(event) {
+    return JSON.stringify(event);
 }
 
 async function resolveEvent(id) {

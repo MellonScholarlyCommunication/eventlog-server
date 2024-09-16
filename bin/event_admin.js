@@ -28,10 +28,17 @@ program
 
 program
     .command('get')
+    .option('-c,--context')
     .argument('<id>','cache identifier')
-    .action( async (id) => {
-        const result = await cache.getCache(id);
-        console.log(JSON.stringify(result,null,2));
+    .action( async (id,opts) => {
+        if (opts.context) {
+            const result = await cache.getCacheContext(id);
+            console.log(JSON.stringify(result,null,2));
+        }
+        else {
+            const result = await cache.getCache(id);
+            console.log(JSON.stringify(result,null,2));
+        }
     });
 
 program
