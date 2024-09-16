@@ -4,6 +4,7 @@
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
         />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <title>Service Node Demo</title>
     </head>
     <body>
@@ -12,7 +13,18 @@
 
             <h2>Trace</h2>
 
-            <a href="trace?artifact=latest">Latest trace log.</a>
+            Most recent trace: <a href="trace?artifact=latest">Event Log</a>
+
+            <p>
+            <pre id="graphDiv">
+            </pre>
+            </p>
 	    </main>
+        <script type="module">
+            import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: false });
+            window.mermaid = mermaid;
+        </script>
+        <script src="js/script.js"></script>
     </body>
 </html>
