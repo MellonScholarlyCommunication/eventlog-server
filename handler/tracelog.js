@@ -32,7 +32,7 @@ async function handle(req,res,options) {
     const traceLog = {
         "@context" : "https://labs.eventnotifications.net/contexts/eventlog.jsonld",
         "id": `${process.env.EVENTLOG_BASEURL}${req.url}`, 
-        "type": "TraceLog",
+        "type": "EventLog",
         "artifact": artifact,
         "member": []
     };
