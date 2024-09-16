@@ -32,7 +32,7 @@ $( document ).ready( async function() {
 
     let story = `
 sequenceDiagram
-    autonumber
+   autonumber
 `;
     
     for (let i = 0 ; i < events.length ; i++) {
@@ -82,6 +82,8 @@ sequenceDiagram
                  `${target}: ${message}\n`;
         story += `   Note right of ${actor}: ${evt.type}\n`;
     }
+
+    console.log(story);
 
     const element = document.querySelector('#graphDiv');
     const { svg, bindFunctions } = await mermaid.render('pre', story);
