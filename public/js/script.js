@@ -69,11 +69,16 @@ sequenceDiagram
                 trace = traceAdd(trace,timeDiff,actor,target,evt.type,evt.object.url[0].href);
             }
         }
-        else if (evt.type === 'Offer' && actor === 'Claimbot') {
+        else if (evt.type === 'Offer' && actor === 'Claimbot' && target === 'MetadataService') {
             message = evt.object.id;
             messageType = 'request';
             trace = traceAdd(trace,timeDiff,actor,target,evt.type,evt.object.id);
         } 
+        else if (evt.type === 'Offer' && actor === 'Claimbot' && target === 'WikiService') {
+            message = evt.object.id;
+            messageType = 'request';
+            trace = traceAdd(trace,timeDiff,actor,target,evt.type,evt.object.content);
+        }
         else if (evt.type === 'Announce' && actor === 'MetadataService') {
             message = 'Service Result of metadata lookup'
             messageType = 'response';
