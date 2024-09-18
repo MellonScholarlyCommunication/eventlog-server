@@ -18,6 +18,22 @@ function actorName(actor) {
     }
 }
 
+function storyAdd(story,actor,target,notificationType,messageType,message) {
+    if (message.length > 40) {
+        message = 
+            message.substring(0,20) + 
+            '...' + 
+            message.substring(message.length - 20);
+    }
+
+    story += `   ${actor}` + 
+             (messageType === 'request' ? '->>+' : '-->>-') + 
+             `${target}: ${message}\n`;
+    story += `   Note right of ${actor}: ${notificationType}\n`;
+
+    return story;
+}
+
 function traceAdd(trace,time,actor,target,type,content) {
     trace += `T0+${time} <b>${actor}</b> => <b>${target}</b> : <b style="color: green">${type}</b> "${content}"\n`;
     return trace;
@@ -64,54 +80,35 @@ sequenceDiagram
 
         if (evt.type === 'Announce' && actor.startsWith('Mastodon')) {
             if (evt.object.url) {
-                message = evt.object.url[0].href;
-                messageType = 'request';
+                story = storyAdd(story,actor,target,evt.type,'request',evt.object.url[0].href);
                 trace = traceAdd(trace,timeDiff,actor,target,evt.type,evt.object.url[0].href);
             }
         }
         else if (evt.type === 'Offer' && actor === 'Claimbot' && target === 'MetadataService') {
-            message = evt.object.id;
-            messageType = 'request';
+            story = storyAdd(story,actor,target,evt.type,'request',evt.object.id);
             trace = traceAdd(trace,timeDiff,actor,target,evt.type,evt.object.id);
         } 
         else if (evt.type === 'Offer' && actor === 'Claimbot' && target === 'WikiService') {
-            message = evt.object.id;
-            messageType = 'request';
+            story = storyAdd(story,actor,target,evt.type,'request',evt.object.id);
             trace = traceAdd(trace,timeDiff,actor,target,evt.type,evt.object.id);
             trace += evt.object.content.replace(/</g,'&lt;').replace(/>/g,'&gt;') + "\n";
         }
         else if (evt.type === 'Announce' && actor === 'MetadataService') {
-            message = 'Service Result of metadata lookup'
-            messageType = 'response';
+            story = storyAdd(story,actor,target,evt.type,'response','Service Result of metadata lookup');
             trace = traceAdd(trace,timeDiff,actor,target,evt.type,evt.object.id);
         }
         else if (evt.type === 'Reject' && actor === 'MetadataService') {
-            message = evt.object.object.id;
-            messageType = 'response';
+            story = storyAdd(story,actor,target,evt.type,'response',evt.object.object.id);
             trace = traceAdd(trace,timeDiff,actor,target,evt.type,evt.object.object.id);
         }
         else if (evt.type === 'Announce' && actor === 'WikiService') {
-            message = evt.object.id.replace(/^.*orcid/,'http://wiki.../orcid');
-            messageType = 'response';
+            story = storyAdd(story,actor,target,evt.type,'response',evt.object.id.replace(/^.*orcid/,'http://wiki.../orcid'));
             trace = traceAdd(trace,timeDiff,actor,target,evt.type,evt.object.id);
         }
         else if (evt.type === 'Announce' && actor === 'Claimbot') {
-            message = evt.object.content.substring(0,40);
-            messageType = 'response';
+            story = storyAdd(story,actor,target,evt.type,'response',evt.object.content);
             trace = traceAdd(trace,timeDiff,actor,target,evt.type,evt.object.content);
         }
-
-        if (message.length > 40) {
-            message = 
-                message.substring(0,20) + 
-                '...' + 
-                message.substring(message.length - 20);
-        }
-
-        story += `   ${actor}` + 
-                 (messageType === 'request' ? '->>+' : '-->>-') + 
-                 `${target}: ${message}\n`;
-        story += `   Note right of ${actor}: ${evt.type}\n`;
     }
 
     console.log(trace);
