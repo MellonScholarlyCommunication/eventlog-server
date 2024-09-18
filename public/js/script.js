@@ -18,6 +18,11 @@ function actorName(actor) {
     }
 }
 
+function traceAdd(trace,time,actor,target,type,content) {
+    trace += `T0+${time} <b>${actor}</b> => <b>${target}</b> : <b style="color: green">${type}</b> "${content}"\n`;
+    return trace;
+}
+
 $( document ).ready( async function() {
     const json = await $.getJSON( "trace?artifact=latest");
     const events = [];
@@ -34,12 +39,26 @@ $( document ).ready( async function() {
 sequenceDiagram
    autonumber
 `;
-    
+   
+    let trace = '';
+
+    let startTime;
+
     for (let i = 0 ; i < events.length ; i++) {
         const evt = events[i];
+        const date = new Date(evt.published);
         const actor = actorName(evt.actor);
         const target = actorName(evt.target);
+        let timeDiff = 0;
         let message = '';
+
+        if (!startTime) {
+            startTime = date;
+            timeDiff = 0;
+        }
+        else {
+            timeDiff = Math.floor((startTime - date) / 1000) % 60;
+        }
 
         let messageType = 'request';
 
@@ -47,27 +66,33 @@ sequenceDiagram
             if (evt.object.url) {
                 message = evt.object.url[0].href;
                 messageType = 'request';
+                trace = traceAdd(trace,timeDiff,actor,target,evt.type,evt.object.url[0].href);
             }
         }
         else if (evt.type === 'Offer' && actor === 'Claimbot') {
             message = evt.object.id;
             messageType = 'request';
+            trace = traceAdd(trace,timeDiff,actor,target,evt.type,evt.object.id);
         } 
         else if (evt.type === 'Announce' && actor === 'MetadataService') {
             message = 'Service Result of metadata lookup'
             messageType = 'response';
+            trace = traceAdd(trace,timeDiff,actor,target,evt.type,evt.object.id);
         }
         else if (evt.type === 'Reject' && actor === 'MetadataService') {
             message = evt.object.object.id;
             messageType = 'response';
+            trace = traceAdd(trace,timeDiff,actor,target,evt.type,evt.object.object.id);
         }
         else if (evt.type === 'Announce' && actor === 'WikiService') {
             message = evt.object.id.replace(/^.*orcid/,'http://wiki.../orcid');
             messageType = 'response';
+            trace = traceAdd(trace,timeDiff,actor,target,evt.type,evt.object.id);
         }
         else if (evt.type === 'Announce' && actor === 'Claimbot') {
             message = evt.object.content.substring(0,40);
             messageType = 'response';
+            trace = traceAdd(trace,timeDiff,actor,target,evt.type,evt.object.content);
         }
 
         if (message.length > 40) {
@@ -83,13 +108,16 @@ sequenceDiagram
         story += `   Note right of ${actor}: ${evt.type}\n`;
     }
 
-    console.log(story);
+    console.log(trace);
 
-    const element = document.querySelector('#graphDiv');
+    const g_element = document.querySelector('#graphDiv');
     const { svg, bindFunctions } = await mermaid.render('pre', story);
-    element.innerHTML = svg;
+    g_element.innerHTML = svg;
 
     if (bindFunctions) {
-        bindFunctions(element);
+        bindFunctions(g_element);
     }
+
+    const t_element = document.querySelector('#graphTrace');
+    t_element.innerHTML = trace;
 });
