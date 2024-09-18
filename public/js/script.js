@@ -78,7 +78,7 @@ sequenceDiagram
             message = evt.object.id;
             messageType = 'request';
             trace = traceAdd(trace,timeDiff,actor,target,evt.type,evt.object.id);
-            trace += evt.object.content.replace(/</g,'&lt;').replace(/>/g,'&gt;');
+            trace += evt.object.content.replace(/</g,'&lt;').replace(/>/g,'&gt;') + "\n";
         }
         else if (evt.type === 'Announce' && actor === 'MetadataService') {
             message = 'Service Result of metadata lookup'
