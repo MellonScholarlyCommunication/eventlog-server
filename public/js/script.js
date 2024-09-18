@@ -57,7 +57,7 @@ sequenceDiagram
             timeDiff = 0;
         }
         else {
-            timeDiff = Math.floor((startTime - date) / 1000) % 60;
+            timeDiff = Math.floor((date - startTime) / 1000) % 60;
         }
 
         let messageType = 'request';
