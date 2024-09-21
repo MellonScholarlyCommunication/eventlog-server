@@ -35,7 +35,23 @@ function storyAdd(story,actor,target,notificationType,messageType,message) {
 }
 
 function traceAdd(trace,time,actor,target,type,content) {
-    trace += `T0+${time} <b>${actor}</b> => <b>${target}</b> : <b style="color: green">${type}</b> "${content}"\n`;
+    let html_content;
+    if (content.startsWith("http")) {
+        html_content = `<a href="${content}">${content}</a>`;
+    }
+    else {
+        html_content = content;
+    }
+    trace += `
+        <div class="tline">
+            <span class="ttime">T0+${time}</span> 
+            <span class="ttype">${type}</span> : 
+            <span class="tactor">${actor}</span> 
+            => 
+            <span class="ttarget">${target}</span> 
+            <br>
+            <span class="tcontent">${html_content}</span>
+        </div>\n`;
     return trace;
 }
 
@@ -90,8 +106,8 @@ sequenceDiagram
         } 
         else if (evt.type === 'Offer' && actor === 'Claimbot' && target === 'WikiService') {
             story = storyAdd(story,actor,target,evt.type,'request',evt.object.id);
-            trace = traceAdd(trace,timeDiff,actor,target,evt.type,evt.object.id);
-            trace += evt.object.content.replace(/</g,'&lt;').replace(/>/g,'&gt;') + "\n";
+            const citation = evt.object.content.replace(/</g,'&lt;').replace(/>/g,'&gt;');
+            trace = traceAdd(trace,timeDiff,actor,target,evt.type,citation);
         }
         else if (evt.type === 'Announce' && actor === 'MetadataService') {
             story = storyAdd(story,actor,target,evt.type,'response','Service Result of metadata lookup');
@@ -110,8 +126,6 @@ sequenceDiagram
             trace = traceAdd(trace,timeDiff,actor,target,evt.type,evt.object.content);
         }
     }
-
-    console.log(trace);
 
     const g_element = document.querySelector('#graphDiv');
     const { svg, bindFunctions } = await mermaid.render('pre', story);

@@ -1,0 +1,45 @@
+.ttime {
+    font-weight: bold;
+    display: inline-block;
+    width: 100px;
+}
+
+.tactor {
+    color:peru;
+}
+
+.ttarget {
+    color:lightcoral;
+}
+
+.ttype {
+    color:blueviolet;
+    font-weight: bold;
+}
+
+.tcontent {
+    display: inline-block;
+    margin-left: 120px;
+    color:lightslategrey;
+}
+
+.tcontent a {
+    color:lightslategrey;
+    text-decoration: none;
+}
+
+.tcontent a:link {
+    color:lightslategrey;
+}
+
+.tcontent a:visited {
+    color:lightslategrey;
+}
+
+.tcontent a:hover {
+    color:lightslategrey;
+}
+
+.tcontent a:active {
+    color:lightslategrey;
+}
