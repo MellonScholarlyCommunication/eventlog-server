@@ -100,6 +100,10 @@ sequenceDiagram
                 trace = traceAdd(trace,timeDiff,actor,target,evt.type,evt.object.url[0].href);
             }
         }
+        else if (evt.type === 'View' && actor === 'Claimbot' && target.startsWith('Mastodon')) {
+            story = storyAdd(story,actor,target,evt.type,'request',evt.object.id);
+            trace = traceAdd(trace,timeDiff,actor,target,evt.type,evt.object.id); 
+        }
         else if (evt.type === 'Offer' && actor === 'Claimbot' && target === 'MetadataService') {
             story = storyAdd(story,actor,target,evt.type,'request',evt.object.id);
             trace = traceAdd(trace,timeDiff,actor,target,evt.type,evt.object.id);
@@ -108,6 +112,10 @@ sequenceDiagram
             story = storyAdd(story,actor,target,evt.type,'request',evt.object.id);
             const citation = evt.object.content.replace(/</g,'&lt;').replace(/>/g,'&gt;');
             trace = traceAdd(trace,timeDiff,actor,target,evt.type,citation);
+        }
+        else if (evt.type === 'View' && actor === 'Claimbot' && target === 'WikiService') {
+            story = storyAdd(story,actor,target,evt.type,'request',evt.object.id);
+            trace = traceAdd(trace,timeDiff,actor,target,evt.type,evt.object.id);
         }
         else if (evt.type === 'Announce' && actor === 'MetadataService') {
             story = storyAdd(story,actor,target,evt.type,'response','Service Result of metadata lookup');
