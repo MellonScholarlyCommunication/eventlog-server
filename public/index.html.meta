@@ -1,6 +1,6 @@
 {
     "Content-Type": "text/html",
-    "Link-Template": "\"https://mycontributions.info/service/e/trace={url}\" ; rel=\"eventlog\"",
+    "Link-Template": "\"https://mycontributions.info/service/e/trace?artifact={url}\" ; rel=\"eventlog\"",
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Expose-Headers": "Link, Link-Template"
 }
