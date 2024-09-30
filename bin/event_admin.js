@@ -7,7 +7,7 @@ const chalk = require('chalk');
 
 require('dotenv').config({path:`${__dirname}/../.env`});
 
-const CACHE_TABLE = process.env.POSTGRES_CACHE_TABLE || "cache";
+const CACHE_TABLE = process.env.CACHE_TABLE || "cache";
 
 program
     .name('event_admin.js')
