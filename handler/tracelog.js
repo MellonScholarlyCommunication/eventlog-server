@@ -7,9 +7,10 @@ async function handle(req,res,options) {
     const parsedUrl = url.parse(req.url,true);
     const queryObject = parsedUrl.query;
     const artifact = queryObject.artifact;
+    const cacheName = queryObject.cache || 'cache';
 
     if (parsedUrl.pathname.includes("/urn:uuid")) {
-        return handleEvent(req,res,options);
+        return handleEvent(req,res,options,{ name: cacheName });
     }
 
     res.setHeader('Content-Type','application/ld+json');
@@ -21,7 +22,7 @@ async function handle(req,res,options) {
         return;
     }
    
-    const events = await resolveEventLog(artifact);
+    const events = await resolveEventLog(artifact, { name: cacheName });
 
     if (! events) {
         res.writeHead(404);
@@ -39,7 +40,7 @@ async function handle(req,res,options) {
 
     for (let i = 0 ; i < events.length ; i++) {
         const event = events[i];
-        const context = await cache.getCacheContext(event.id);
+        const context = await cache.getCacheContext(event.id, { name: cacheName });
         const checksum = md5(makeEvent(event));
         traceLog.member.push({
             id: `${process.env.EVENTLOG_BASEURL}${parsedUrl.pathname}/${event.id}` ,
@@ -56,11 +57,11 @@ async function handle(req,res,options) {
     res.end(JSON.stringify(traceLog));
 }
 
-async function handleEvent(req,res,options) {
+async function handleEvent(req,res,options,param) {
     const parsedUrl = url.parse(req.url,true);
     const id = parsedUrl.pathname.replace(/\/trace\//,'');
 
-    const event = await resolveEvent(id);
+    const event = await resolveEvent(id,param);
     
     res.setHeader('Content-Type','application/ls+json');
     res.setHeader('Access-Control-Allow-Origin','*');
@@ -79,10 +80,10 @@ function makeEvent(event) {
     return JSON.stringify(event);
 }
 
-async function resolveEvent(id) {
-    logger.debug(`resolveEvent(${id})`);
+async function resolveEvent(id,param) {
+    logger.debug(`resolveEvent(${id},${param})`);
     try {
-        const event = await cache.getCache(id);
+        const event = await cache.getCache(id,param);
         return event;
     }
     catch (e) {
@@ -91,15 +92,15 @@ async function resolveEvent(id) {
     }
 }
 
-async function resolveEventLog(url) {
-    logger.debug(`resolveEventLog(${url})`);
+async function resolveEventLog(url,param) {
+    logger.debug(`resolveEventLog(${url},${param})`);
 
     try {
         let latest;
 
         // Add here a hack to find the latest trace based on a metadata offer
         if (url === 'latest') {
-            const events = await cache.listCache('','original=NULL');
+            const events = await cache.listCache('','original=NULL',param);
         
             if (events.length == 0) {
                 return null;
@@ -108,7 +109,7 @@ async function resolveEventLog(url) {
             latest = events.at(-1);
         }
         else {
-            const events = await cache.listCache(`object.id=${url}`);
+            const events = await cache.listCache(`object.id=${url}`,param);
 
             if (events.length == 0) {
                 return null;
@@ -121,14 +122,14 @@ async function resolveEventLog(url) {
             return null;
         }
 
-        const related = await cache.listCache('',`original=${latest}`);
+        const related = await cache.listCache('',`original=${latest}`,param);
 
         const trace = [ latest ].concat(related);
 
         const resolved = [];
 
         for (let i = 0 ; i < trace.length ; i++) {
-            const event = await cache.getCache(trace[i]); 
+            const event = await cache.getCache(trace[i],param); 
             resolved.push(event);      
         }
 
