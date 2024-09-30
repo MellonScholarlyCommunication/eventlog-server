@@ -5,7 +5,7 @@ const cache = require('../lib');
 const fs = require('fs');
 const chalk = require('chalk');
 
-require('dotenv').config({path:`${__dirname}/../.env`});
+require('dotenv').config();
 
 const CACHE_TABLE = process.env.CACHE_TABLE || "cache";
 
