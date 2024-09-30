@@ -72,7 +72,7 @@ program
 program
     .command('remove-all')
     .action( async () => {
-        const list = await cache.listCache(program.opts());
+        const list = await cache.listCache(null,null,program.opts());
         for (let i = 0 ; i < list.length ; i++) {
             const result = await cache.removeCache(list[i],program.opts());
             console.log(`${list[i]} ${result}`);
