@@ -1,0 +1,24 @@
+{
+  "@context": "https://www.w3.org/ns/activitystreams",
+  "id": "urn:uuid:3ec6772a-6381-42fc-ba3a-3c4d5c1e5704",
+  "type": "Offer",
+  "published": "2024-09-30T10:51:57.582Z",
+  "actor": {
+    "id": "https://mycontributions.info/service/m/profile/card#me",
+    "name": "Mastodon Bot",
+    "inbox": "https://mycontributions.info/service/m/inbox/",
+    "type": "Service"
+  },
+  "context": "https://wiki.mycontributions.info/en/researcher/orcid/0000-0001-8390-6171",
+  "object": {
+    "id": "urn:uuid:b2d5c478-1350-495d-a9a3-35f0c8f1441c",
+    "content": "<div class=\"csl-bib-body\">\n  <div data-csl-entry-id=\"3DTHDU3G\" class=\"csl-entry\">Pozsgay, B., Sharipov, R., Tiutiakina, A., &#38; Vona, I. (2024). <i>Adiabatic gauge potential and integrability breaking with free fermions</i>. https://scipost.org/submissions/scipost_202408_00008v1/</div>\n</div>",
+    "type": "Note"
+  },
+  "target": {
+    "id": "https://wiki.mycontributions.info/profile/card#me",
+    "name": "Wiki.JS",
+    "inbox": "https://wiki.mycontributions.info/inbox/",
+    "type": "Service"
+  }
+}

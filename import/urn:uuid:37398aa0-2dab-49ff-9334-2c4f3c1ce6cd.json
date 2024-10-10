@@ -1,0 +1,29 @@
+{
+  "@context": "https://www.w3.org/ns/activitystreams",
+  "id": "urn:uuid:37398aa0-2dab-49ff-9334-2c4f3c1ce6cd",
+  "type": "Announce",
+  "published": "2024-09-16T12:29:24.000Z",
+  "actor": {
+    "id": "https://mastodon.social/@patrickhochstenbach",
+    "name": "patrickhochstenbach",
+    "inbox": "https://mastodon.social/users/patrickhochstenbach/inbox",
+    "type": "Person"
+  },
+  "origin": {
+    "id": "https://mycontributions.info/service/m/profile/card#me",
+    "name": "Mastodon Bot",
+    "inbox": "https://mycontributions.info/service/m/inbox/",
+    "type": "Service"
+  },
+  "object": {
+    "id": "https://mastodon.social/@patrickhochstenbach/113147233210413712",
+    "content": "<p><a href=\"https://biblio.ugent.be/publication/1964739\" rel=\"nofollow noopener noreferrer\" translate=\"no\" target=\"_blank\"><span class=\"invisible\">https://</span><span class=\"ellipsis\">biblio.ugent.be/publication/19</span><span class=\"invisible\">64739</span></a> <span class=\"h-card\" translate=\"no\"><a href=\"https://mas.to/@claimbot\" class=\"u-url mention\" rel=\"nofollow noopener noreferrer\" target=\"_blank\">@<span>claimbot</span></a></span></p>",
+    "url": [
+      {
+        "type": "Link",
+        "href": "https://biblio.ugent.be/publication/1964739"
+      }
+    ],
+    "type": "Note"
+  }
+}

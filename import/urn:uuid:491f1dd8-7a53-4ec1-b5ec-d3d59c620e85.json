@@ -1,0 +1,29 @@
+{
+  "@context": "https://www.w3.org/ns/activitystreams",
+  "id": "urn:uuid:491f1dd8-7a53-4ec1-b5ec-d3d59c620e85",
+  "type": "Announce",
+  "published": "2024-09-18T11:26:55.000Z",
+  "actor": {
+    "id": "https://mastodon.social/@patrickhochstenbach",
+    "name": "patrickhochstenbach",
+    "inbox": "https://mastodon.social/users/patrickhochstenbach/inbox",
+    "type": "Person"
+  },
+  "origin": {
+    "id": "https://mycontributions.info/service/m/profile/card#me",
+    "name": "Mastodon Bot",
+    "inbox": "https://mycontributions.info/service/m/inbox/",
+    "type": "Service"
+  },
+  "object": {
+    "id": "https://mastodon.social/@patrickhochstenbach/113158312100990798",
+    "content": "<p><span class=\"h-card\" translate=\"no\"><a href=\"https://mas.to/@claimbot\" class=\"u-url mention\" rel=\"nofollow noopener noreferrer\" target=\"_blank\">@<span>claimbot</span></a></span> <br><a href=\"https://link.springer.com/chapter/10.1007/978-3-031-72407-7_15\" rel=\"nofollow noopener noreferrer\" translate=\"no\" target=\"_blank\"><span class=\"invisible\">https://</span><span class=\"ellipsis\">link.springer.com/chapter/10.1</span><span class=\"invisible\">007/978-3-031-72407-7_15</span></a></p>",
+    "url": [
+      {
+        "type": "Link",
+        "href": "https://link.springer.com/chapter/10.1007/978-3-031-72407-7_15"
+      }
+    ],
+    "type": "Note"
+  }
+}

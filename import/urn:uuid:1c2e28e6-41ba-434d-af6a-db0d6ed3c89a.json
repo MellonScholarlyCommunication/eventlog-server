@@ -1,0 +1,19 @@
+{
+  "@context": "https://www.w3.org/ns/activitystreams",
+  "id": "urn:uuid:1c2e28e6-41ba-434d-af6a-db0d6ed3c89a",
+  "type": "View",
+  "published": "2024-09-23T12:51:10.131Z",
+  "actor": {
+    "id": "https://mycontributions.info/service/m/profile/card#me",
+    "name": "Mastodon Bot",
+    "inbox": "https://mycontributions.info/service/m/inbox/",
+    "type": "Service"
+  },
+  "object": {
+    "id": "https://mastodon.social/@patrickhochstenbach",
+    "type": "Document"
+  },
+  "target": {
+    "id": "https://mastodon.social/@patrickhochstenbach"
+  }
+}

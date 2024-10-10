@@ -1,0 +1,24 @@
+{
+  "@context": "https://www.w3.org/ns/activitystreams",
+  "id": "urn:uuid:0e12bd4c-881f-482f-8bbf-43f8b1e5b239",
+  "type": "Offer",
+  "published": "2024-09-16T12:29:38.469Z",
+  "actor": {
+    "id": "https://mycontributions.info/service/m/profile/card#me",
+    "name": "Mastodon Bot",
+    "inbox": "https://mycontributions.info/service/m/inbox/",
+    "type": "Service"
+  },
+  "context": "https://wiki.mycontributions.info/en/researcher/orcid/0000-0001-8390-6171",
+  "object": {
+    "id": "urn:uuid:17b179bd-6650-4397-b15a-26b5f62a4f49",
+    "content": "<div class=\"csl-bib-body\">\n  <div data-csl-entry-id=\"LDGVSK3C\" class=\"csl-entry\">Coppens, S., Mannens, E., Van Deursen, D., Hochstenbach, P., Janssens, B., &#38; Van de Walle, R. (2011). Publishing provenance information on the web using the Memento datetime content negotiation. <i>CEUR WORKSHOP PROCEEDINGS</i>, <i>813</i>, 6–15. http://hdl.handle.net/1854/LU-1964739</div>\n</div>",
+    "type": "Note"
+  },
+  "target": {
+    "id": "https://wiki.mycontributions.info/profile/card#me",
+    "name": "Wiki.JS",
+    "inbox": "https://wiki.mycontributions.info/inbox/",
+    "type": "Service"
+  }
+}

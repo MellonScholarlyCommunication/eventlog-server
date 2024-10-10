@@ -54,9 +54,18 @@ yarn db-shell
 
 Drop and recreate an event log cache with name `name`.
 
-**addCache(notification: any, context { original: string }, param { name:string }) : string | null**
+**addCache(notification: any, context: any, param { name:string }) : string | null**
 
 Add a new notification to the cache with name `name`. Optional provide the identifier of an ancestor notification in the context. Return the identifier of the stored notification or null on error.
+
+Example context:
+
+```
+{
+  "updated": "2024-10-10T10:35:40.972Z",
+  "original": "urn:uuid:b6049038-f87f-42ec-918b-2b732ff3c209"
+}
+```
 
 **getCache(id: string, param { name: string }) : any | null**
 

@@ -1,0 +1,23 @@
+{
+  "@context": "https://www.w3.org/ns/activitystreams",
+  "id": "urn:uuid:c656687e-69ba-466f-a11e-911a270ad9e7",
+  "type": "Announce",
+  "published": "2024-09-18T11:27:09.796Z",
+  "actor": {
+    "id": "https://wiki.mycontributions.info/profile/card#me",
+    "name": "Wiki.JS",
+    "inbox": "https://wiki.mycontributions.info/inbox/",
+    "type": "Service"
+  },
+  "context": "https://mastodon.social/@patrickhochstenbach/113158312100990798",
+  "object": {
+    "id": "https://wiki.mycontributions.info/en/researcher/orcid/0000-0001-8390-6171",
+    "type": "WebPage"
+  },
+  "target": {
+    "id": "https://mycontributions.info/service/m/profile/card#me",
+    "name": "Mastodon Bot",
+    "inbox": "https://mycontributions.info/service/m/inbox/",
+    "type": "Service"
+  }
+}

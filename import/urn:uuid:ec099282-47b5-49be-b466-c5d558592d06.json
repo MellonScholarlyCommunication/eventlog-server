@@ -1,0 +1,22 @@
+{
+  "@context": "https://www.w3.org/ns/activitystreams",
+  "id": "urn:uuid:ec099282-47b5-49be-b466-c5d558592d06",
+  "type": "Offer",
+  "published": "2024-09-23T12:51:10.282Z",
+  "actor": {
+    "id": "https://mycontributions.info/service/m/profile/card#me",
+    "name": "Mastodon Bot",
+    "inbox": "https://mycontributions.info/service/m/inbox/",
+    "type": "Service"
+  },
+  "object": {
+    "id": "https://biblio.ugent.be/publication/480375",
+    "type": "Document"
+  },
+  "target": {
+    "id": "https://mycontributions.info/service/x/profile/card#me",
+    "name": "Zotero Web Service",
+    "inbox": "https://mycontributions.info/service/x/inbox/",
+    "type": "Service"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "@context": "https://www.w3.org/ns/activitystreams",
+  "id": "urn:uuid:56c42d18-105c-4c42-af45-44abb284cac1",
+  "type": "Announce",
+  "published": "2024-09-09T11:46:13.700Z",
+  "actor": {
+    "id": "https://mycontributions.info/service/z/profile/card#me",
+    "name": "Zotero Service Provider",
+    "inbox": "https://mycontributions.info/service/z/inbox/",
+    "type": "Service"
+  },
+  "origin": {
+    "id": "https://mycontributions.info/service/z/profile/card#me",
+    "name": "Zotero Service Provider",
+    "inbox": "https://mycontributions.info/service/z/inbox/",
+    "type": "Service"
+  },
+  "inReplyTo": "urn:uuid:8ba424c0-83e9-4c80-ae99-8eac3cf4e1b0",
+  "object": {
+    "id": "https://mycontributions.info/service/x/result/2024/09/09/64cddfa7fbdfe512976ace12ba24fb60.json",
+    "type": "Document"
+  },
+  "target": {
+    "id": "https://mycontributions.info/service/m/profile/card#me",
+    "name": "Mastodon Bot",
+    "inbox": "https://mycontributions.info/service/m/inbox/",
+    "type": "Service"
+  }
+}

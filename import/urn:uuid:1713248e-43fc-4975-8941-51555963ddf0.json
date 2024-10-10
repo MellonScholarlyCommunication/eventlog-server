@@ -1,0 +1,24 @@
+{
+  "@context": "https://www.w3.org/ns/activitystreams",
+  "id": "urn:uuid:1713248e-43fc-4975-8941-51555963ddf0",
+  "type": "Offer",
+  "published": "2024-09-23T12:51:22.045Z",
+  "actor": {
+    "id": "https://mycontributions.info/service/m/profile/card#me",
+    "name": "Mastodon Bot",
+    "inbox": "https://mycontributions.info/service/m/inbox/",
+    "type": "Service"
+  },
+  "context": "https://wiki.mycontributions.info/en/researcher/orcid/0000-0001-8390-6171",
+  "object": {
+    "id": "urn:uuid:bea06362-6b5c-403f-8a6a-56a84e973e90",
+    "content": "<div class=\"csl-bib-body\">\n  <div data-csl-entry-id=\"WGXA6EJN\" class=\"csl-entry\">Jerez, H., Liu, X., Hochstenbach, P., &#38; Van de Sompel, H. (2004). <i>The multi-faceted use of the OAI-PMH in the LANL Repository</i>. JCDL 2004. http://hdl.handle.net/1854/LU-480375</div>\n</div>",
+    "type": "Note"
+  },
+  "target": {
+    "id": "https://wiki.mycontributions.info/profile/card#me",
+    "name": "Wiki.JS",
+    "inbox": "https://wiki.mycontributions.info/inbox/",
+    "type": "Service"
+  }
+}

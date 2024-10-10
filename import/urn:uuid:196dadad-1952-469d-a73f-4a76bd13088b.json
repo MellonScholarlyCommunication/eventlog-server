@@ -1,0 +1,29 @@
+{
+  "@context": "https://www.w3.org/ns/activitystreams",
+  "id": "urn:uuid:196dadad-1952-469d-a73f-4a76bd13088b",
+  "type": "Announce",
+  "published": "2024-10-09T12:35:13.000Z",
+  "actor": {
+    "id": "https://mastodon.social/@patrickhochstenbach",
+    "name": "patrickhochstenbach",
+    "inbox": "https://mastodon.social/users/patrickhochstenbach/inbox",
+    "type": "Person"
+  },
+  "origin": {
+    "id": "https://mycontributions.info/service/m/profile/card#me",
+    "name": "Mastodon Bot",
+    "inbox": "https://mycontributions.info/service/m/inbox/",
+    "type": "Service"
+  },
+  "object": {
+    "id": "https://mastodon.social/@patrickhochstenbach/113277489215632942",
+    "content": "<p><span class=\"h-card\" translate=\"no\"><a href=\"https://mas.to/@claimbot\" class=\"u-url mention\" rel=\"nofollow noopener noreferrer\" target=\"_blank\">@<span>claimbot</span></a></span>  <a href=\"https://www.dlib.org/dlib/april99/van_de_sompel/04van_de_sompel-pt2.html\" rel=\"nofollow noopener noreferrer\" translate=\"no\" target=\"_blank\"><span class=\"invisible\">https://www.</span><span class=\"ellipsis\">dlib.org/dlib/april99/van_de_s</span><span class=\"invisible\">ompel/04van_de_sompel-pt2.html</span></a></p>",
+    "url": [
+      {
+        "type": "Link",
+        "href": "https://www.dlib.org/dlib/april99/van_de_sompel/04van_de_sompel-pt2.html"
+      }
+    ],
+    "type": "Note"
+  }
+}

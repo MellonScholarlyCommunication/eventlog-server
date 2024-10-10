@@ -1,0 +1,22 @@
+{
+  "@context": "https://www.w3.org/ns/activitystreams",
+  "id": "urn:uuid:e9c85ed1-79e1-42e7-b7ba-5df2e0fb4f5c",
+  "type": "Offer",
+  "published": "2024-09-18T11:26:57.694Z",
+  "actor": {
+    "id": "https://mycontributions.info/service/m/profile/card#me",
+    "name": "Mastodon Bot",
+    "inbox": "https://mycontributions.info/service/m/inbox/",
+    "type": "Service"
+  },
+  "object": {
+    "id": "https://link.springer.com/chapter/10.1007/978-3-031-72407-7_15",
+    "type": "Document"
+  },
+  "target": {
+    "id": "https://mycontributions.info/service/x/profile/card#me",
+    "name": "Zotero Web Service",
+    "inbox": "https://mycontributions.info/service/x/inbox/",
+    "type": "Service"
+  }
+}

@@ -27,7 +27,7 @@ function storyAdd(story,actor,target,notificationType,messageType,message) {
     }
 
     story += `   ${actor}` + 
-             (messageType === 'request' ? '->>+' : '-->>-') + 
+             (messageType === 'request' ? '->>+' : '->>+') + 
              `${target}: ${message}\n`;
     story += `   Note right of ${actor}: ${notificationType}\n`;
 

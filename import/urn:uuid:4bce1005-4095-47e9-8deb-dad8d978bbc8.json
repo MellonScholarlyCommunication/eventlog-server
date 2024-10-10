@@ -1,0 +1,22 @@
+{
+  "@context": "https://www.w3.org/ns/activitystreams",
+  "id": "urn:uuid:4bce1005-4095-47e9-8deb-dad8d978bbc8",
+  "type": "View",
+  "published": "2024-09-30T10:51:45.127Z",
+  "actor": {
+    "id": "https://mycontributions.info/service/m/profile/card#me",
+    "name": "Mastodon Bot",
+    "inbox": "https://mycontributions.info/service/m/inbox/",
+    "type": "Service"
+  },
+  "object": {
+    "id": "https://wiki.mycontributions.info/en/researcher/orcid/0000-0001-8390-6171",
+    "type": "Document"
+  },
+  "target": {
+    "id": "https://wiki.mycontributions.info/profile/card#me",
+    "name": "Wiki.JS",
+    "inbox": "https://wiki.mycontributions.info/inbox/",
+    "type": "Service"
+  }
+}

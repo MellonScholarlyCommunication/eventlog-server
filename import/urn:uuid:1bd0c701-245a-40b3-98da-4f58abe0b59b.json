@@ -1,0 +1,23 @@
+{
+  "@context": "https://www.w3.org/ns/activitystreams",
+  "id": "urn:uuid:1bd0c701-245a-40b3-98da-4f58abe0b59b",
+  "type": "Announce",
+  "published": "2024-09-12T08:57:58.503Z",
+  "actor": {
+    "id": "https://mycontributions.info/service/m/profile/card#me",
+    "name": "Mastodon Bot",
+    "inbox": "https://mycontributions.info/service/m/inbox/",
+    "type": "Service"
+  },
+  "object": {
+    "id": "urn:uuid:f0dc248e-2b68-44b2-b10d-51fc3d429336",
+    "type": "Note",
+    "content": "I updated your researcher contributions https://wiki.mycontributions.info/en/researcher/orcid/0000-0001-8390-6171 :)"
+  },
+  "target": {
+    "id": "https://mastodon.social/@patrickhochstenbach",
+    "name": "patrickhochstenbach",
+    "inbox": "https://mastodon.social/users/patrickhochstenbach/inbox",
+    "type": "Person"
+  }
+}

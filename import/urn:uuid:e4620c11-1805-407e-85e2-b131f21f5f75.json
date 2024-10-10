@@ -1,0 +1,22 @@
+{
+  "@context": "https://www.w3.org/ns/activitystreams",
+  "id": "urn:uuid:e4620c11-1805-407e-85e2-b131f21f5f75",
+  "type": "Offer",
+  "published": "2024-10-09T12:35:19.131Z",
+  "actor": {
+    "id": "https://mycontributions.info/service/m/profile/card#me",
+    "name": "Mastodon Bot",
+    "inbox": "https://mycontributions.info/service/m/inbox/",
+    "type": "Service"
+  },
+  "object": {
+    "id": "https://www.dlib.org/dlib/april99/van_de_sompel/04van_de_sompel-pt2.html",
+    "type": "Document"
+  },
+  "target": {
+    "id": "https://mycontributions.info/service/x/profile/card#me",
+    "name": "Zotero Web Service",
+    "inbox": "https://mycontributions.info/service/x/inbox/",
+    "type": "Service"
+  }
+}

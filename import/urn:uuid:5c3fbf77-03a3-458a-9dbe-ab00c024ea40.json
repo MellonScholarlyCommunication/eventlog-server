@@ -1,0 +1,24 @@
+{
+  "@context": "https://www.w3.org/ns/activitystreams",
+  "id": "urn:uuid:5c3fbf77-03a3-458a-9dbe-ab00c024ea40",
+  "type": "Offer",
+  "published": "2024-10-09T12:35:33.656Z",
+  "actor": {
+    "id": "https://mycontributions.info/service/m/profile/card#me",
+    "name": "Mastodon Bot",
+    "inbox": "https://mycontributions.info/service/m/inbox/",
+    "type": "Service"
+  },
+  "context": "https://wiki.mycontributions.info/en/researcher/orcid/0000-0001-8390-6171",
+  "object": {
+    "id": "urn:uuid:44b9cba0-006b-49f5-85a9-83f39434d257",
+    "content": "<div class=\"csl-bib-body\">\n  <div data-csl-entry-id=\"KTT863QK\" class=\"csl-entry\"><i>Reference Linking in a Hybrid Library Enivonment Part 2: SFX, a Generic Linking Solution</i>. (n.d.). Retrieved October 9, 2024, from https://www.dlib.org/dlib/april99/van_de_sompel/04van_de_sompel-pt2.html</div>\n</div>",
+    "type": "Note"
+  },
+  "target": {
+    "id": "https://wiki.mycontributions.info/profile/card#me",
+    "name": "Wiki.JS",
+    "inbox": "https://wiki.mycontributions.info/inbox/",
+    "type": "Service"
+  }
+}

@@ -19,7 +19,7 @@
   },
   "scripts": {
     "server": "npx mellon-server --registry config/registry.json5",
-    "demo": "./bin/event_admin.js add demo/example_incoming.jsonld",
+    "demo": "./bin/event_admin.js add import/*.json",
     "clean": "./bin/event_admin.js remove-all",
     "real-clean": "./bin/event_admin.js remove-all",
     "db-start": "docker compose -f compose.yaml up -d",

@@ -80,7 +80,7 @@ program
         for (let i = 0 ; i < file.length ; i++) {
             const json = file[i];
             const data = JSON.parse(fs.readFileSync(json, { encoding: 'utf-8'}));
-            const context = {};
+            let context = {};
             if (data.original) {
                 // Hack to inject an original in the data for test purposes...
                 context['original'] = data.original;

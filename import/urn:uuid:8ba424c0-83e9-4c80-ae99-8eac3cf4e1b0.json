@@ -1,0 +1,22 @@
+{
+  "@context": "https://www.w3.org/ns/activitystreams",
+  "id": "urn:uuid:8ba424c0-83e9-4c80-ae99-8eac3cf4e1b0",
+  "type": "Offer",
+  "published": "2024-09-09T11:46:09.359Z",
+  "actor": {
+    "id": "https://mycontributions.info/service/m/profile/card#me",
+    "name": "Mastodon Bot",
+    "inbox": "https://mycontributions.info/service/m/inbox/",
+    "type": "Service"
+  },
+  "object": {
+    "id": "https://abuseofnotation.github.io/category-theory-illustrated/05_logic/",
+    "type": "Document"
+  },
+  "target": {
+    "id": "https://mycontributions.info/service/x/profile/card#me",
+    "name": "Zotero Web Service",
+    "inbox": "https://mycontributions.info/service/x/inbox/",
+    "type": "Service"
+  }
+}
