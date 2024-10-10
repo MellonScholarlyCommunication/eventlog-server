@@ -7,11 +7,11 @@ const chalk = require('chalk');
 
 require('dotenv').config();
 
-const CACHE_TABLE = process.env.CACHE_TABLE || "cache";
+const CACHE_NAME = process.env.CACHE_NAME || "cache";
 
 program
     .name('event_admin.js')
-    .option(`--name <name>`,'Name of cache table', CACHE_TABLE);
+    .option(`--name <name>`,'Name of cache table', CACHE_NAME);
 
 program
     .command('init')
