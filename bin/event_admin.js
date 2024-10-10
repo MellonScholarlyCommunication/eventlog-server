@@ -22,10 +22,10 @@ program
 
 program
     .command('list')
-    .argument('[queryPath]','query')
-    .argument('[contextPath]','query')
-    .action( async (queryPath,contextPath) => {
-        const result = await cache.listCache(queryPath,contextPath, program.opts());
+    .option('-qp,--query-path <path_query>','data query')
+    .option('-cp,--context-path <path_query>','context query')
+    .action( async (opts) => {
+        const result = await cache.listCache(opts.queryPath,opts.contextPath, program.opts());
         console.log(result);
     });
 
@@ -45,6 +45,32 @@ program
     });
 
 program
+    .command('export')
+    .option('-qp,--query-path <path_query>','data query')
+    .option('-cp,--context-path <path_query>','context query')
+    .option('--context')
+    .argument('<directory>','output directory')
+    .action( async (directory,opts) => {
+        const result = await cache.listCache(opts.queryPath,opts.contextPath, program.opts());
+
+        if (! fs.existsSync(directory)) {
+            fs.mkdirSync(directory, { recursive: true });
+        }
+
+        for (let i = 0 ; i < result.length ; i++) {
+            const id = result[i];
+            const data = await cache.getCache(id,program.opts());
+
+            fs.writeFileSync(`${directory}/${id}.json`,JSON.stringify(data,null,2));
+
+            if (opts.context) {
+                const context = await cache.getCacheContext(id,program.opts());
+                fs.writeFileSync(`${directory}/${id}.json.meta`,JSON.stringify(context,null,2));
+            }
+        } 
+    });
+
+program
     .command('add')
     .argument('<file...>','json notification')
     .action( async (file) => {
@@ -55,6 +81,9 @@ program
             if (data.original) {
                 // Hack to inject an original in the data for test purposes...
                 context['original'] = data.original;
+            }
+            else if (fs.existsSync(`${json}.meta`)) {
+                context = JSON.parse(fs.readFileSync(`${json}.meta`, { encoding: 'utf8'}));
             }
             const result = await cache.addCache(data,context,program.opts());
             console.log(result);
