@@ -61,10 +61,13 @@ program
             const id = result[i];
             const data = await cache.getCache(id,program.opts());
 
+            console.log(`${directory}/${id}.json`);
             fs.writeFileSync(`${directory}/${id}.json`,JSON.stringify(data,null,2));
 
             if (opts.context) {
                 const context = await cache.getCacheContext(id,program.opts());
+
+                console.log(`${directory}/${id}.json.meta`);
                 fs.writeFileSync(`${directory}/${id}.json.meta`,JSON.stringify(context,null,2));
             }
         } 
