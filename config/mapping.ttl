@@ -1,0 +1,179 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix csl: <http://purl.org/net/xbiblio/csl#> .
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix bibo: <http://purl.org/ontology/bibo/> .
+@prefix schema: <https://schema.org/> .
+@prefix ex: <http://example.com/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+
+@base <http://example.com/base/> .
+
+<#TriplesMap1>
+  a rr:TriplesMap;
+    
+  rml:logicalSource [ 
+    rml:source "%%FILE%%";
+    rml:referenceFormulation ql:JSONPath ;
+    rml:iterator "$[*]"
+  ];
+
+  rr:subjectMap [ 
+    rml:reference "URL" 
+  ]; 
+
+  rr:predicateObjectMap [ 
+    rr:predicate rdf:type; 
+    rr:objectMap [
+      rr:template "http://purl.org/net/xbiblio/csl#{type}"
+    ]
+  ];
+
+  rr:predicateObjectMap [ 
+    rr:predicate schema:abstract; 
+    rr:objectMap [
+      rml:reference "abstract"
+    ]
+  ];
+
+  rr:predicateObjectMap [ 
+    rr:predicate schema:author; 
+    rr:objectMap [
+      rml:reference "author[*].id" ;
+      rr:termType rr:IRI
+    ]
+  ];
+
+  rr:predicateObjectMap [ 
+    rr:predicate schema:editor; 
+    rr:objectMap [
+      rml:reference "editor[*].id" ;
+      rr:termType rr:IRI
+    ]
+  ];
+
+  rr:predicateObjectMap [ 
+    rr:predicate schema:datePublished; 
+    rr:objectMap [
+      rml:reference "issued.date-parts[:1][:1]"
+    ]
+  ];
+
+  rr:predicateObjectMap [ 
+    rr:predicate schema:isbn; 
+    rr:objectMap [
+      rml:reference "ISBN"
+    ]
+  ];
+
+  rr:predicateObjectMap [ 
+    rr:predicate schema:issn; 
+    rr:objectMap [
+      rml:reference "ISSN"
+    ]
+  ];
+
+  rr:predicateObjectMap [ 
+    rr:predicate schema:language; 
+    rr:objectMap [
+      rml:reference "language"
+    ]
+  ];
+
+  rr:predicateObjectMap [ 
+    rr:predicate bibo:pages; 
+    rr:objectMap [
+      rml:reference "page"
+    ]
+  ];
+
+  rr:predicateObjectMap [ 
+    rr:predicate schema:publication; 
+    rr:objectMap [
+      rml:reference "event-title"
+    ]
+  ];
+
+  rr:predicateObjectMap [ 
+    rr:predicate schema:publisher; 
+    rr:objectMap [
+      rml:reference "publisher"
+    ]
+  ];
+
+  rr:predicateObjectMap [ 
+    rr:predicate schema:title; 
+    rr:objectMap [
+      rml:reference "title"
+    ]
+  ].
+
+<#TriplesMap2>
+  a rr:TriplesMap;
+
+  rml:logicalSource [ 
+    rml:source "%%FILE%%";
+    rml:referenceFormulation ql:JSONPath ;
+    rml:iterator "$.[*].author[*]"
+  ];
+
+  rr:subjectMap [ 
+    rml:reference "id"
+  ];
+
+  rr:predicateObjectMap [ 
+    rr:predicate schema:givenName; 
+    rr:objectMap [
+      rml:reference "given"
+    ]
+  ];
+
+    rr:predicateObjectMap [ 
+    rr:predicate schema:familyName; 
+    rr:objectMap [
+      rml:reference "family"
+    ]
+  ];
+
+  rr:predicateObjectMap [ 
+    rr:predicate rdf:type; 
+    rr:objectMap [
+      rr:constant schema:Person 
+    ]
+  ].
+
+<#TriplesMap3>
+  a rr:TriplesMap;
+
+  rml:logicalSource [ 
+    rml:source "%%FILE%%";
+    rml:referenceFormulation ql:JSONPath ;
+    rml:iterator "$.[*].editor[*]"
+  ];
+
+  rr:subjectMap [ 
+    rml:reference "id"
+  ];
+
+  rr:predicateObjectMap [ 
+    rr:predicate schema:givenName; 
+    rr:objectMap [
+      rml:reference "given"
+    ]
+  ];
+
+    rr:predicateObjectMap [ 
+    rr:predicate schema:familyName; 
+    rr:objectMap [
+      rml:reference "family"
+    ]
+  ];
+
+  rr:predicateObjectMap [ 
+    rr:predicate rdf:type; 
+    rr:objectMap [
+      rr:constant schema:Person 
+    ]
+  ].

@@ -1,0 +1,51 @@
+[
+	{
+		"id": "3DTHDU3G",
+		"type": "article-journal",
+		"abstract": "SciPost Submission Detail Adiabatic gauge potential and integrability breaking with free fermions",
+		"language": "en",
+		"source": "scipost.org",
+		"title": "Adiabatic gauge potential and integrability breaking with free fermions",
+		"URL": "https://scipost.org/submissions/scipost_202408_00008v1/",
+		"author": [
+			{
+				"id": "urn:uuid:794D852E-158A-4A06-8E47-F1986AEAA47",
+				"family": "Pozsgay",
+				"given": "Balázs"
+			},
+			{
+				"id": "urn:uuid:7DC0AE28-526B-4350-AB1A-8AB6DC4ABF77",
+				"family": "Sharipov",
+				"given": "Rustem"
+			},
+			{
+				"id": "urn:uuid:0EB20C28-FCEB-45B5-8DC7-9EA368CE242A",
+				"family": "Tiutiakina",
+				"given": "Anastasiia"
+			},
+			{
+				"id": "urn:uuid:BD760166-4DD8-41C8-87F2-D4B981358122",
+				"family": "Vona",
+				"given": "István"
+			}
+		],
+		"accessed": {
+			"date-parts": [
+				[
+					"2024",
+					9,
+					30
+				]
+			]
+		},
+		"issued": {
+			"date-parts": [
+				[
+					"2024",
+					8,
+					9
+				]
+			]
+		}
+	}
+]

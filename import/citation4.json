@@ -1,0 +1,69 @@
+[
+	{
+		"id": "G4AC2ST9",
+		"type": "paper-conference",
+		"abstract": "Inspired by the idea of RDF Redux, an RDF extension suggested by Pat Hayes, RDF Surfaces were recently developed and further specified by a W3C community group. The idea of RDF Surfaces is to add negation and explicit existential quantification to RDF and thereby gain the expressivity of first-order logic. RDF Surfaces come with a syntax and even with first implementations, but the semantics has so far only been defined informally. In this paper we aim to close this gap: we map RDF Surface graphs to first-order logic formulae and thereby define their semantics. We show that, restricted to RDF graphs, this semantics preserves simple entailment. That is, each RDF graph which entails another in its first-order translation, also entails this graph according to RDF’s simple entailment and vice versa. To test whether this semantics fully meets the informal specification, we furthermore provide rs2fol, an implementation which follows our mapping and translates RDF Surfaces in N3-based syntax to first-order logic in TPTP syntax. We apply this implementation on the various examples collected on the Web page of the RDF Surfaces reasoner EYE, run them with the theorem prover Vampire and compare the results with those of EYE. With the exception of a different understanding of lists – EYE treats these as first-class citizens – results of both approaches coincide. We thus provides a tool for entailment checking which is conform to the current specification. This tool will help future developers of RDF Surfaces reasoners to test their derivations for correctness and the community as a whole to better understand the logic and – if needed – to refine or even restrict it.",
+		"container-title": "Rules and Reasoning",
+		"DOI": "10.1007/978-3-031-72407-7_15",
+		"event-place": "Cham",
+		"ISBN": "9783031724077",
+		"language": "en",
+		"page": "200-216",
+		"publisher": "Springer Nature Switzerland",
+		"publisher-place": "Cham",
+		"source": "Springer Link",
+		"title": "RDF Surfaces as a First-Order Language for the Semantic Web",
+		"author": [
+			{
+				"family": "Arndt",
+				"given": "Dörthe"
+			},
+			{
+				"family": "De Roo",
+				"given": "Jos"
+			},
+			{
+				"family": "Hochstenbach",
+				"given": "Patrick"
+			},
+			{
+				"family": "Martens",
+				"given": "Rebekka"
+			},
+			{
+				"family": "Ongenae",
+				"given": "Femke"
+			},
+			{
+				"family": "Noort",
+				"given": "Mathijs",
+				"non-dropping-particle": "van"
+			}
+		],
+		"editor": [
+			{
+				"family": "Kirrane",
+				"given": "Sabrina"
+			},
+			{
+				"family": "Šimkus",
+				"given": "Mantas"
+			},
+			{
+				"family": "Soylu",
+				"given": "Ahmet"
+			},
+			{
+				"family": "Roman",
+				"given": "Dumitru"
+			}
+		],
+		"issued": {
+			"date-parts": [
+				[
+					"2024"
+				]
+			]
+		}
+	}
+]

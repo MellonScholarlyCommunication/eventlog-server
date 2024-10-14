@@ -1,0 +1,47 @@
+[
+	{
+		"id": "WGXA6EJN",
+		"type": "paper-conference",
+		"abstract": "This paper focuses on the multifaceted use of the OAI-PMH in a repository architecture designed to store digital assets at the Research Library of the Los Alamos National Laboratory (LANL), and to make the stored assets available in a uniform way to various downstream applications. In the architecture, the MPEG-21 Digital Item Declaration Language is used as the XML-based format to represent complex digital objects. Upon ingestion, these objects are stored in a multitude of autonomous OAI-PMH repositories. An OAI-PMH compliant Repository Index keeps track of the creation and location of all those repositories, whereas an Identifier Resolver keeps track of the location of individual objects. An OAI-PMH Federator is introduced as a single-point-of-access to downstream harvesters. It hides the complexity of the environment to those harvesters, and allows them to obtain transformations of stored objects. While the proposed architecture is described in the context of the LANL library, the paper will also touch on its more general applicability.",
+		"event-title": "JCDL 2004",
+		"language": "eng",
+		"license": "No license (in copyright)",
+		"source": "biblio.ugent.be",
+		"title": "The multi-faceted use of the OAI-PMH in the LANL Repository",
+		"URL": "http://hdl.handle.net/1854/LU-480375",
+		"author": [
+			{
+				"family": "Jerez",
+				"given": "Henry"
+			},
+			{
+				"family": "Liu",
+				"given": "Xiaoming"
+			},
+			{
+				"family": "Hochstenbach",
+				"given": "Patrick"
+			},
+			{
+				"family": "Van de Sompel",
+				"given": "Herbert"
+			}
+		],
+		"accessed": {
+			"date-parts": [
+				[
+					"2024",
+					9,
+					23
+				]
+			]
+		},
+		"issued": {
+			"date-parts": [
+				[
+					"2004"
+				]
+			]
+		}
+	}
+]
