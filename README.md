@@ -75,7 +75,7 @@ Return the notification with identifier `id` from the cache with name `name`.
 
 Return the notification context with identifier `id` from the cache with name `name`.
 
-**listCache(dataPath: string | null , contextPath: string | null, param { name: string }): [string]**
+**listCache(dataPath: string | null , contextPath: string | null, param { name: string , limit: num , offset: num }): [string]**
 
 Return a list of all notification identifiers from the cache with name `name`.
 

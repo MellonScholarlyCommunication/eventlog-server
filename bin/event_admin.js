@@ -25,8 +25,13 @@ program
     .command('list')
     .option('-qp,--query-path <path_query>','data query')
     .option('-cp,--context-path <path_query>','context query')
+    .option('--limit <num>','maximum number of records to return')
+    .option('--offset <num>','offset for the quert')
     .action( async (opts) => {
-        const result = await cache.listCache(opts.queryPath,opts.contextPath, program.opts());
+        const other = program.opts();
+        other['limit'] = opts.limit;
+        other['offset'] = opts.offset;
+        const result = await cache.listCache(opts.queryPath,opts.contextPath,other);
         console.log(result);
     });
 
