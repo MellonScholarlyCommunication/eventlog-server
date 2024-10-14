@@ -3,6 +3,7 @@
 const { program } = require('commander');
 const cache = require('../lib');
 const fs = require('fs');
+const { open } = require('node:fs/promises');
 const chalk = require('chalk');
 
 require('dotenv').config();
@@ -48,29 +49,39 @@ program
     .command('export')
     .option('-qp,--query-path <path_query>','data query')
     .option('-cp,--context-path <path_query>','context query')
-    .option('--context')
-    .argument('<directory>','output directory')
-    .action( async (directory,opts) => {
+    .action( async (opts) => {
         const result = await cache.listCache(opts.queryPath,opts.contextPath, program.opts());
-
-        if (! fs.existsSync(directory)) {
-            fs.mkdirSync(directory, { recursive: true });
-        }
 
         for (let i = 0 ; i < result.length ; i++) {
             const id = result[i];
             const data = await cache.getCache(id,program.opts());
+            const context = await cache.getCacheContext(id,program.opts());
 
-            console.log(`${directory}/${id}.json`);
-            fs.writeFileSync(`${directory}/${id}.json`,JSON.stringify(data,null,2));
-
-            if (opts.context) {
-                const context = await cache.getCacheContext(id,program.opts());
-
-                console.log(`${directory}/${id}.json.meta`);
-                fs.writeFileSync(`${directory}/${id}.json.meta`,JSON.stringify(context,null,2));
-            }
+            console.log(JSON.stringify({
+                'data': data ,
+                'context': context
+            }));
         } 
+    });
+
+program
+    .command('import')
+    .argument('<file>','export file')
+    .action( async (file) => {
+        const fh = await open(file);
+        for await (const line of fh.readLines()) {
+            const json = JSON.parse(line);
+            const data = json.data;
+            let context = json.context;
+
+            if (data.original) {
+                // Hack to inject an original in the data for test purposes...
+                context['original'] = data.original;
+            }
+        
+            const result = await cache.addCache(data,context,program.opts());
+            console.log(result);
+        }
     });
 
 program
