@@ -19,7 +19,6 @@
     "event_admin": "./bin/event_admin.js"
   },
   "scripts": {
-    "download:rmlmapper": "node node_modules/@rmlio/rmlmapper-java-wrapper/lib/download-latest-rmlmapper.js",
     "server": "npx mellon-server --registry config/registry.json5",
     "demo": "./bin/event_admin.js init ; ./bin/event_admin.js import import/demo.json",
     "clean": "./bin/event_admin.js remove-all",

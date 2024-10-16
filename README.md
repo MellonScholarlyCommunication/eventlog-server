@@ -8,12 +8,6 @@ A small event log server for demonstration purposes. Main purpose it displaying 
 yarn install
 ```
 
-Optional for RDF generation install RML mapper
-
-```
-yarn download:rmlmapper
-```
-
 # Run
 
 ```
