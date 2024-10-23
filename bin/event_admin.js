@@ -14,6 +14,12 @@ program
     .name('event_admin.js')
     .option(`--name <name>`,'Name of cache table', CACHE_NAME);
 
+program 
+    .command('env')
+    .action( () => {
+        console.log(program.opts());
+    });
+
 program
     .command('init')
     .action( async() => {
