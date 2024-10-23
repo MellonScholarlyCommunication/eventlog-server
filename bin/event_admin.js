@@ -164,7 +164,11 @@ async function summaryFor(thisId,spacing = 0) {
     if (! (notification && context)) {
         return;
     }
-    
+   
+    if (! (notification.actor && notification.object)) {
+        return;
+    }
+
     const id = notification.id;
     const type = notification.type;
     const actor = notification.actor.id;
