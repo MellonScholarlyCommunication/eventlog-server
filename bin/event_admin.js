@@ -60,18 +60,30 @@ program
     .command('export')
     .option('-qp,--query-path <path_query>','data query')
     .option('-cp,--context-path <path_query>','context query')
+    .option('--intention <intention>','mirror|rdf','mirror')
     .action( async (opts) => {
         const result = await cache.listCache(opts.queryPath,opts.contextPath, program.opts());
 
         for (let i = 0 ; i < result.length ; i++) {
             const id = result[i];
             const data = await cache.getCache(id,program.opts());
-            const context = await cache.getCacheContext(id,program.opts());
 
-            console.log(JSON.stringify({
-                'data': data ,
-                'context': context
-            }));
+            if (opts.intention === 'mirror') {
+                const context = await cache.getCacheContext(id,program.opts());
+
+                console.log(JSON.stringify({
+                    'data': data ,
+                    'context': context
+                }));
+            }
+            else if (opts.intention === 'rdf') {
+                console.log(JSON.stringify(data));
+            }
+            else {
+                console.error(`unknown intention ${opts.intention}`);
+                console.error(`need mirror|rdf`);
+                process.exit(2);
+            }
         } 
     });
 
