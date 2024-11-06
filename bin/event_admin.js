@@ -38,7 +38,12 @@ program
         other['limit'] = opts.limit;
         other['offset'] = opts.offset;
         const result = await cache.listCache(opts.queryPath,opts.contextPath,other);
-        console.log(result);
+
+        if (result) {
+            for (let i = 0 ; i < result.length ; i++) {
+                console.log(result[i]);
+            }
+        }
     });
 
 program
