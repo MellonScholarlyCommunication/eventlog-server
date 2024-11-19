@@ -190,6 +190,7 @@ async function summaryFor(thisId,spacing = 0) {
     const type = notification.type;
     const actor = notification.actor.id;
     const object = notification.object.id;
+    const url = notification.object.url;
     const updated = context.updated;
 
     let sp = ' '.repeat(spacing); 
@@ -201,6 +202,17 @@ async function summaryFor(thisId,spacing = 0) {
     
     if (context.original) {
         console.log(`${sp} ${chalk.yellow('original')}: ${chalk.blue(context.original)}`);
+    }
+    
+    if (! context.original && url) {
+        if (Array.isArray(url)) {
+            for (let i = 0 ; i < url.length ; i++) {
+                console.log(`${sp} ${chalk.yellow('url')}: ${url[i].href}`);
+            }
+        }
+        else {
+            console.log(`${sp} ${chalk.yellow('url')}: ${url.href}`);
+        }
     }
 
     console.log();
