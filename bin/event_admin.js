@@ -152,28 +152,29 @@ program
 
 program
     .command('summary')
+    .option('-n,--names','Show names instead of actor id')
     .argument('[id]', 'for this identifier')
-    .action( async (id) => {
+    .action( async (id,opts) => {
         if (id) {
-            await summaryFor(id);
+            await summaryFor(id,0,opts);
         
             const list = await cache.listCache('',`original=${id}`,program.opts());
             for (let i = 0 ; i < list.length ; i++) {
-                await summaryFor(list[i],2);
+                await summaryFor(list[i],2,opts);
             }
         }
         else {
             const list = await cache.listCache('','original=NULL',program.opts());
 
             for (let i = 0 ; i < list.length ; i++) {
-                await summaryFor(list[i]);
+                await summaryFor(list[i],0,opts);
             }
         }
     });
 
 program.parse();
 
-async function summaryFor(thisId,spacing = 0) {
+async function summaryFor(thisId,spacing = 0,opts) {
 
     const notification = await cache.getCache(thisId,program.opts());
     const context = await cache.getCacheContext(thisId,program.opts());
@@ -188,7 +189,18 @@ async function summaryFor(thisId,spacing = 0) {
 
     const id = notification.id;
     const type = notification.type;
-    const actor = notification.actor.id;
+    let actor = notification.actor.id;
+
+    if (opts.names && notification.actor.name) {
+        actor = notification.actor.name;
+    }
+
+    let target = notification.target?.id; 
+
+    if (opts.names && notification.target?.name) {
+        target = notification.target.name;
+    }
+
     const object = notification.object.id;
     const url = notification.object.url;
     const updated = context.updated;
@@ -197,6 +209,7 @@ async function summaryFor(thisId,spacing = 0) {
     
     console.log(`${sp}${chalk.blue(id)} ${chalk.red(type)}`);
     console.log(`${sp} ${chalk.yellow('from')}: ${actor}`);
+    console.log(`${sp} ${chalk.yellow('target')}: ${target}`);
     console.log(`${sp} ${chalk.yellow('object')}: ${object}`);
     console.log(`${sp} ${chalk.yellow('updated')}: ${updated}`);
     
