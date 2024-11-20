@@ -203,19 +203,20 @@ async function summaryFor(thisId,spacing = 0,opts) {
 
     const object = notification.object.id;
     const url = notification.object.url;
-    const updated = context.updated;
+    const updated = (new Date(context.updated)).toISOString();
 
     let sp = ' '.repeat(spacing); 
     
     console.log(`${sp}${chalk.blue(id)} ${chalk.red(type)}`);
-    console.log(`${sp} ${chalk.yellow('from')}: ${actor}`);
-    console.log(`${sp} ${chalk.yellow('target')}: ${target}`);
-    console.log(`${sp} ${chalk.yellow('object')}: ${object}`);
-    console.log(`${sp} ${chalk.yellow('updated')}: ${updated}`);
-    
+
     if (context.original) {
         console.log(`${sp} ${chalk.yellow('original')}: ${chalk.blue(context.original)}`);
     }
+    
+    console.log(`${sp} ${chalk.yellow('updated')}: ${updated}`);
+    console.log(`${sp} ${chalk.yellow('from')}: ${actor}`);
+    console.log(`${sp} ${chalk.yellow('to')}: ${target}`);
+    console.log(`${sp} ${chalk.yellow('object')}: ${object}`);
     
     if (! context.original && url) {
         if (Array.isArray(url)) {
@@ -226,6 +227,13 @@ async function summaryFor(thisId,spacing = 0,opts) {
         else {
             console.log(`${sp} ${chalk.yellow('url')}: ${url.href}`);
         }
+    }
+    
+    if (notification.type === 'Announce' &&
+        notification.object?.type === 'Note' &&
+        notification.object?.content) {
+        const content = notification.object.content.replace(/<[^>]+>/g,'');
+        console.log(`${sp} - ${chalk.yellow('content')}: ${content}`);
     }
 
     console.log();
