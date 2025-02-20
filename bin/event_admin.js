@@ -22,8 +22,11 @@ program
 
 program
     .command('init')
-    .action( async() => {
-        const result = await cache.initCache(program.opts());
+    .option(`--drop`,'Drop the old data')
+    .action( async(opts) => {
+        const other = program.opts();
+        other['drop'] = opts.drop;
+        const result = await cache.initCache(other);
         console.log(result);
     });
 
