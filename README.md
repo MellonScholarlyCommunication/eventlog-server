@@ -98,9 +98,30 @@ actor.type!=Person
 # Find all with object.url not set
 object.url=NULL
 
-# Finf all with object.ur set
+# Find all with object.ur set
 object.url!=NULL
 ```
 **removeCache(id: string, param { name: string} ) : boolean**
 
 Remove from the cache with name `name` the notification with idenfitier `id`.
+
+
+## Docker
+
+Build a version of a docker image:
+
+```
+docker build . -t hochstenbach/eventlog-server:v0.0.1
+```
+
+Run a docker image:
+
+```
+docker container run -p 3006:3006 hochstenbach/eventlog-server:v0.0.1
+```
+
+Push it to DockerHub:
+
+```
+docker push hochstenbach/eventlog-server:v0.0.1
+```

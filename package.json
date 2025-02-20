@@ -23,8 +23,8 @@
     "demo": "./bin/event_admin.js init ; ./bin/event_admin.js import import/demo.json",
     "clean": "./bin/event_admin.js remove-all",
     "real-clean": "./bin/event_admin.js remove-all",
-    "db-start": "docker compose -f compose.yaml up -d",
-    "db-stop": "docker compose -f compose.yaml down",
+    "db-start": "docker compose up -d",
+    "db-stop": "docker compose down",
     "db-shell": "docker exec -it db psql -U postgres"
   }
 }
