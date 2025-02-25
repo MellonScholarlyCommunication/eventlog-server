@@ -117,7 +117,7 @@ docker build . -t hochstenbach/eventlog-server:v0.0.1
 Run a docker image:
 
 ```
-docker container run -p 3006:3006 hochstenbach/eventlog-server:v0.0.1
+docker container run -p 3006:3006 -e POSTGRES_HOST=host.docker.internal hochstenbach/eventlog-server:v0.0.1
 ```
 
 Push it to DockerHub:
