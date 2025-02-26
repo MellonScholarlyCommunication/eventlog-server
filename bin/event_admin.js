@@ -17,7 +17,7 @@ program
 program 
     .command('env')
     .action( () => {
-        console.log(program.opts());
+        console.log(process.env);
     });
 
 program
