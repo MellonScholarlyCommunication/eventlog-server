@@ -1,8 +1,9 @@
 FROM node:18-alpine3.20
 
 ENV NODE_ENV=production
-ENV EVENTLOG_BASEURL=http://0.0.0.0:3006
+ENV EVENTLOG_BASEURL=http://0.0.0.0:3003
 ENV POSTGRES_PORT=5432
+ENV POSTGRES_HOST=host.docker.internal
 ENV POSTGRES_PASSWORD=postgres
 ENV POSTGRES_USER=postgres
 
@@ -14,6 +15,6 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 3006
+EXPOSE 3003
 
-CMD ./bin/event_admin.js init --drop ; ./bin/event_admin.js import import/demo.json ; npx mellon-server --host 0.0.0.0 --port 3006 --registry config/registry.json5
+CMD ./bin/event_admin.js init --drop ; ./bin/event_admin.js import import/demo.json ; npx mellon-server --host 0.0.0.0 --port 3003 --registry config/registry.json5
