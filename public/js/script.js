@@ -1,5 +1,6 @@
 function actorName(actor) {
     const id = actor?.id;
+    const name = actor?.name;
 
     if (! id) {
         return 'Claimbot';
@@ -7,11 +8,20 @@ function actorName(actor) {
     else if (id === 'https://mycontributions.info/service/m/profile/card#me') {
         return 'Claimbot';
     }
+    else if (name.startsWith('Claim') || name === 'Mastodon Bot') {
+        return 'Claimbot';
+    }
     else if (id === 'https://mycontributions.info/service/x/profile/card#me') {
         return 'MetadataService';
     }
+    else if (name.startsWith('Metadata')) {
+        return 'MetadataService';
+    }
     else if (id === 'https://wiki.mycontributions.info/profile/card#me') {
-        return 'WikiService'
+        return 'WikiService';
+    }
+    else if (name.startsWith('Wiki')) {
+        return 'WikiService';
     }
     else {
         return 'Mastodon ' + id.replace(/.*@/g,'@');
@@ -83,6 +93,8 @@ sequenceDiagram
         const target = actorName(evt.target);
         let timeDiff = 0;
         let message = '';
+
+        console.log(`${evt.type} from ${actor} to ${target}`);
 
         if (!startTime) {
             startTime = date;
