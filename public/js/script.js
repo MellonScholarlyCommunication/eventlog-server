@@ -23,8 +23,11 @@ function actorName(actor) {
     else if (name.startsWith('Wiki')) {
         return 'WikiService';
     }
+    else if (name.startsWith('Verification')) {
+        return 'VerificationService';
+    }
     else {
-        return 'Mastodon ' + id.replace(/.*@/g,'@');
+        return 'Mastodon ' + name;
     }
 }
 
@@ -129,6 +132,10 @@ sequenceDiagram
             story = storyAdd(story,actor,target,evt.type,'request',evt.object.id);
             trace = traceAdd(trace,timeDiff,actor,target,evt.type,evt.object.id);
         }
+        else if (evt.type === 'View' && actor === 'Claimbot' && target === 'VerificationService') {
+            story = storyAdd(story,actor,target,evt.type,'request',evt.object.id);
+            trace = traceAdd(trace,timeDiff,actor,target,evt.type,evt.object.id);
+        }
         else if (evt.type === 'Announce' && actor === 'MetadataService') {
             story = storyAdd(story,actor,target,evt.type,'response','Service Result of metadata lookup');
             trace = traceAdd(trace,timeDiff,actor,target,evt.type,evt.object.id);
@@ -146,6 +153,8 @@ sequenceDiagram
             trace = traceAdd(trace,timeDiff,actor,target,evt.type,evt.object.content);
         }
     }
+
+    console.log(story);
 
     const g_element = document.querySelector('#graphDiv');
     const { svg, bindFunctions } = await mermaid.render('pre', story);
