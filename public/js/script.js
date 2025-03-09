@@ -1,6 +1,6 @@
 function actorName(actor) {
     const id = actor?.id;
-    const name = actor?.name;
+    const name = actor?.name || "";
 
     if (! id) {
         return 'Claimbot';
