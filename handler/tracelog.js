@@ -109,7 +109,7 @@ async function resolveEventLog(url,param) {
             latest = events.at(-1);
         }
         else {
-            const events = await cache.listCache(`object.id=${url}`,param);
+            const events = await cache.listCache(`object.id=${url}`,'',param);
 
             if (events.length == 0) {
                 return null;
