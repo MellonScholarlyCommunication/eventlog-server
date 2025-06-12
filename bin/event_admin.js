@@ -34,10 +34,14 @@ program
     .command('list')
     .option('-qp,--query-path <path_query>','data query')
     .option('-cp,--context-path <path_query>','context query')
+    .option('--from <date>','date = YYYY-MM-DD HH:MM::SS')
+    .option('--until <date>','date = YYYY-MM-DD HH:MM::SS')
     .option('--limit <num>','maximum number of records to return')
-    .option('--offset <num>','offset for the quert')
+    .option('--offset <num>','offset for the query')
     .action( async (opts) => {
         const other = program.opts();
+        other['from'] = opts.from;
+        other['until'] = opts.until;
         other['limit'] = opts.limit;
         other['offset'] = opts.offset;
         const result = await cache.listCache(opts.queryPath,opts.contextPath,other);
