@@ -63,7 +63,7 @@ async function handleEvent(req,res,options,param) {
 
     const event = await resolveEvent(id,param);
     
-    res.setHeader('Content-Type','application/ls+json');
+    res.setHeader('Content-Type','application/ld+json');
     res.setHeader('Access-Control-Allow-Origin','*');
 
     if (! event) {
