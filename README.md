@@ -17,9 +17,25 @@ cp .env-example .env
 
 # Run
 
+Start a postgres database (using Docker):
+
+```
+yarn db-start
+```
+
+Import some demo data:
+
+```
+yarn demo
+```
+
+Start the http server:
+
 ```
 yarn server
 ```
+
+Visit the demo page: http://localhost:8000/
 
 # Demo
 
@@ -35,13 +51,8 @@ Show the trace of an Event log about `http://abc.org`:
 http://localhost:8000/trace?artifact=http://abc.org
 ```
 
-## Development mode (docker)
+# Stop
 
-Start the postgres server:
-
-```
-yarn db-start
-```
 
 Stop the postgres server:
 
@@ -49,11 +60,6 @@ Stop the postgres server:
 yarn db-stop
 ```
 
-Run a psql shell:
-
-```
-yarn db-shell
-```
 
 ## API
 
