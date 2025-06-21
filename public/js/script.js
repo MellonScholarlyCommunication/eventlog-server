@@ -8,6 +8,9 @@ function actorName(actor) {
     else if (id === 'https://mycontributions.info/service/m/profile/card#me') {
         return 'Claimbot';
     }
+    else if (id === 'https://mycontributions.info/service/c/profile/card#me') {
+        return 'ClaimLogService';
+    }
     else if (name.startsWith('Claim') || name === 'Mastodon Bot') {
         return 'Claimbot';
     }
@@ -148,11 +151,15 @@ sequenceDiagram
             story = storyAdd(story,actor,target,evt.type,'response',evt.object.id.replace(/^.*orcid/,'http://wiki.../orcid'));
             trace = traceAdd(trace,timeDiff,actor,target,evt.type,evt.object.id);
         }
+        else if (evt.type === 'Announce' && target === 'ClaimLogService') {
+            story = storyAdd(story,actor,target,evt.type,'request',evt.object.id);
+            trace = traceAdd(trace,timeDiff,actor,target,evt.type,evt.object.id);
+        }
         else if (evt.type === 'Announce' && actor === 'Claimbot') {
             story = storyAdd(story,actor,target,evt.type,'response',evt.object.content);
             trace = traceAdd(trace,timeDiff,actor,target,evt.type,evt.object.content);
         }
-    }
+   }
 
     console.log(story);
 
