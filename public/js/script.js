@@ -20,7 +20,7 @@ function actorName(actor) {
     else if (name.startsWith('Verification')) {
         return 'VerificationService';
     }
-    else if (id && id.includes('@')) {
+    else if (id && ( id.includes('@') || id.includes('mastodon')) ) {
         return 'Mastodon';
     }
     else {
@@ -29,7 +29,7 @@ function actorName(actor) {
 }
 
 function storyAdd(story,actor,target,notificationType,message) {
-    if (message.length > 40) {
+    if (message && message.length > 40) {
         message = 
             message.substring(0,20) + 
             '...' + 
@@ -44,7 +44,7 @@ function storyAdd(story,actor,target,notificationType,message) {
 
 function traceAdd(trace,time,actor,target,type,content) {
     let html_content;
-    if (content.startsWith("http")) {
+    if (content && content.startsWith("http")) {
         html_content = `<a href="${content}">${content}</a>`;
     }
     else {
@@ -107,7 +107,7 @@ sequenceDiagram
             const citation = evt.object.content.replace(/</g,'&lt;').replace(/>/g,'&gt;');
             trace = traceAdd(trace,timeDiff,actor,target,evt.type,citation);
         }
-        else if (evt.type === 'Announce' && actor === 'BotService') {
+        else if (evt.type === 'Announce' && actor === 'BotService' && target === 'Mastodon') {
             story = storyAdd(story,actor,target,evt.type,evt.object.content);
             trace = traceAdd(trace,timeDiff,actor,target,evt.type,evt.object.content);
         }
