@@ -1,40 +1,34 @@
+const ACTOR_TYPES = {
+    'http://host.docker.internal:3002/profile/card#me' : 'BotService',
+    'https://mycontributions.info/service/m/profile/card#me' : 'BotService',
+    'http://host.docker.internal:3000/profile/card#me' : 'WikiService',
+    'https://wiki.mycontributions.info/profile/card#me' : 'WikiService',
+    'http://host.docker.internal:3001/profile/card#me' : 'MetadataService',
+    'https://mycontributions.info/service/x/profile/card#me' : 'MetadataService',
+    'http://host.docker.internal:3006/profile/card#me' : 'ClaimService',
+    'https://mycontributions.info/service/c/profile/card#me' : 'ClaimService'
+};
+
 function actorName(actor) {
     const id = actor?.id;
     const name = actor?.name || "";
+    const type = ACTOR_TYPES[id];
 
-    if (! id) {
-        return 'Claimbot';
-    }
-    else if (id === 'https://mycontributions.info/service/m/profile/card#me') {
-        return 'Claimbot';
-    }
-    else if (id === 'https://mycontributions.info/service/c/profile/card#me') {
-        return 'ClaimLogService';
-    }
-    else if (name.startsWith('Claim') || name === 'Mastodon Bot') {
-        return 'Claimbot';
-    }
-    else if (id === 'https://mycontributions.info/service/x/profile/card#me') {
-        return 'MetadataService';
-    }
-    else if (name.startsWith('Metadata')) {
-        return 'MetadataService';
-    }
-    else if (id === 'https://wiki.mycontributions.info/profile/card#me') {
-        return 'WikiService';
-    }
-    else if (name.startsWith('Wiki')) {
-        return 'WikiService';
+    if (type) {
+        return type;
     }
     else if (name.startsWith('Verification')) {
         return 'VerificationService';
     }
+    else if (id && id.includes('@')) {
+        return 'Mastodon';
+    }
     else {
-        return 'Mastodon ' + name;
+        return 'BotService';
     }
 }
 
-function storyAdd(story,actor,target,notificationType,messageType,message) {
+function storyAdd(story,actor,target,notificationType,message) {
     if (message.length > 40) {
         message = 
             message.substring(0,20) + 
@@ -42,9 +36,7 @@ function storyAdd(story,actor,target,notificationType,messageType,message) {
             message.substring(message.length - 20);
     }
 
-    story += `   ${actor}` + 
-             (messageType === 'request' ? '->>+' : '->>+') + 
-             `${target}: ${message}\n`;
+    story += `   ${actor} ->>+ ${target}: ${message}\n`;
     story += `   Note right of ${actor}: ${notificationType}\n`;
 
     return story;
@@ -110,54 +102,18 @@ sequenceDiagram
             timeDiff = Math.floor((date - startTime) / 1000) % 60;
         }
 
-        let messageType = 'request';
-
-        if (evt.type === 'Announce' && actor.startsWith('Mastodon')) {
-            if (evt.object.url) {
-                story = storyAdd(story,actor,target,evt.type,'request',evt.object.url[0].href);
-                trace = traceAdd(trace,timeDiff,actor,target,evt.type,evt.object.url[0].href);
-            }
-        }
-        else if (evt.type === 'View' && actor === 'Claimbot' && target.startsWith('Mastodon')) {
-            story = storyAdd(story,actor,target,evt.type,'request',evt.object.id);
-            trace = traceAdd(trace,timeDiff,actor,target,evt.type,evt.object.id); 
-        }
-        else if (evt.type === 'Offer' && actor === 'Claimbot' && target === 'MetadataService') {
-            story = storyAdd(story,actor,target,evt.type,'request',evt.object.id);
-            trace = traceAdd(trace,timeDiff,actor,target,evt.type,evt.object.id);
-        } 
-        else if (evt.type === 'Offer' && actor === 'Claimbot' && target === 'WikiService') {
-            story = storyAdd(story,actor,target,evt.type,'request',evt.object.id);
+        if (evt.type === 'Offer' && actor === 'BotService' && target === 'WikiService') {
+            story = storyAdd(story,actor,target,evt.type,evt.object.id);
             const citation = evt.object.content.replace(/</g,'&lt;').replace(/>/g,'&gt;');
             trace = traceAdd(trace,timeDiff,actor,target,evt.type,citation);
         }
-        else if (evt.type === 'View' && actor === 'Claimbot' && target === 'WikiService') {
-            story = storyAdd(story,actor,target,evt.type,'request',evt.object.id);
-            trace = traceAdd(trace,timeDiff,actor,target,evt.type,evt.object.id);
-        }
-        else if (evt.type === 'View' && actor === 'Claimbot' && target === 'VerificationService') {
-            story = storyAdd(story,actor,target,evt.type,'request',evt.object.id);
-            trace = traceAdd(trace,timeDiff,actor,target,evt.type,evt.object.id);
-        }
-        else if (evt.type === 'Announce' && actor === 'MetadataService') {
-            story = storyAdd(story,actor,target,evt.type,'response','Service Result of metadata lookup');
-            trace = traceAdd(trace,timeDiff,actor,target,evt.type,evt.object.id);
-        }
-        else if (evt.type === 'Reject' && actor === 'MetadataService') {
-            story = storyAdd(story,actor,target,evt.type,'response',evt.object.object.id);
-            trace = traceAdd(trace,timeDiff,actor,target,evt.type,evt.object.object.id);
-        }
-        else if (evt.type === 'Announce' && actor === 'WikiService') {
-            story = storyAdd(story,actor,target,evt.type,'response',evt.object.id.replace(/^.*orcid/,'http://wiki.../orcid'));
-            trace = traceAdd(trace,timeDiff,actor,target,evt.type,evt.object.id);
-        }
-        else if (evt.type === 'Announce' && target === 'ClaimLogService') {
-            story = storyAdd(story,actor,target,evt.type,'request',evt.object.id);
-            trace = traceAdd(trace,timeDiff,actor,target,evt.type,evt.object.id);
-        }
-        else if (evt.type === 'Announce' && actor === 'Claimbot') {
-            story = storyAdd(story,actor,target,evt.type,'response',evt.object.content);
+        else if (evt.type === 'Announce' && actor === 'BotService') {
+            story = storyAdd(story,actor,target,evt.type,evt.object.content);
             trace = traceAdd(trace,timeDiff,actor,target,evt.type,evt.object.content);
+        }
+        else {
+            story = storyAdd(story,actor,target,evt.type,evt.object.id);
+            trace = traceAdd(trace,timeDiff,actor,target,evt.type,evt.object.id);
         }
    }
 
