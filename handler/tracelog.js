@@ -42,20 +42,10 @@ async function handle(req,res,options) {
         const event = events[i];
         const context = await cache.getCacheContext(event.id, { name: cacheName });
         const checksum = md5(makeEvent(event));
-        let claim;
-
-        if (context.original) {
-            const original = await cache.getCache(context.original, { name: cacheName });
-            claim = original.object.url[0].href;
-        }
-        else {
-            claim = event.object.url[0].href;
-        }
 
         traceLog.member.push({
             id: `${process.env.EVENTLOG_BASEURL}${parsedUrl.pathname}/${event.id}` ,
             created: context.updated,
-            'dcterms:references': claim,
             checksum: {
                 type: "Checksum",
                 algorithm: "spdx:checksumAlgorithm_md5",
