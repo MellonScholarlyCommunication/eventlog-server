@@ -114,6 +114,12 @@ async function resolveEventLog(id,param) {
             latest = events.at(-1);
         }
         else {
+            const event = await cache.getCache(id,param);
+
+            if (!event) {
+                return null;
+            }
+            
             latest = id;
         }
 

@@ -15,9 +15,10 @@
             <h1>Service Node Demo</h1>
 
             <h2>Trace</h2>
-
-            Most recent trace: <a href="trace?claim=latest">Event Log</a>
-
+            <div><input id="logid" type="text" value="latest" size="80"/></div>
+            <ul>
+                <li><a id="logurl" href="trace?claim=latest">Event Log</a></li>
+            </ul>
             <p>
             <pre id="graphDiv">
             </pre>

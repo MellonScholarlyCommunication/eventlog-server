@@ -63,8 +63,8 @@ function traceAdd(trace,time,actor,target,type,content) {
     return trace;
 }
 
-$( document ).ready( async function() {
-    const json = await $.getJSON( "trace?claim=latest");
+async function updateTrace(id) {
+    const json = await $.getJSON(`trace?claim=${id}`);
     const events = [];
 
     if (json.member) {
@@ -129,4 +129,14 @@ sequenceDiagram
 
     const t_element = document.querySelector('#graphTrace');
     t_element.innerHTML = trace;
+}
+
+$( document ).ready( async function() {
+    $('#logid').on('change', async () => {
+        const id = $('#logid').val();
+        await updateTrace(id);
+        $('#logurl').attr("href","trace?claim=" + id);
+    });
+
+    await updateTrace('latest');
 });
