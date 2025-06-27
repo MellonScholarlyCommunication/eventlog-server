@@ -64,7 +64,7 @@ function traceAdd(trace,time,actor,target,type,content) {
 }
 
 $( document ).ready( async function() {
-    const json = await $.getJSON( "trace?artifact=latest");
+    const json = await $.getJSON( "trace?claim=latest");
     const events = [];
 
     if (json.member) {

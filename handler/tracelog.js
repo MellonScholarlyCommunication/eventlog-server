@@ -6,7 +6,7 @@ const md5 = require('md5');
 async function handle(req,res,options) {
     const parsedUrl = url.parse(req.url,true);
     const queryObject = parsedUrl.query;
-    const artifact = queryObject.artifact;
+    const claim = queryObject.claim;
     const cacheName = queryObject.cache || 'cache';
 
     if (parsedUrl.pathname.includes("/urn:uuid")) {
@@ -16,17 +16,17 @@ async function handle(req,res,options) {
     res.setHeader('Content-Type','application/ld+json');
     res.setHeader('Access-Control-Allow-Origin','*');
 
-    if (! artifact) {
+    if (! claim) {
         res.writeHead(404);
-        res.end(JSON.stringify({ error : `need artifact parameter`}));
+        res.end(JSON.stringify({ error : `need claim parameter`}));
         return;
     }
    
-    const events = await resolveEventLog(artifact, { name: cacheName });
+    const events = await resolveEventLog(claim, { name: cacheName });
 
     if (! events) {
         res.writeHead(404);
-        res.end(JSON.stringify({ error : `no events for ${artifact}`}));
+        res.end(JSON.stringify({ error : `no events for ${claim}`}));
         return;
     }
 
@@ -34,7 +34,7 @@ async function handle(req,res,options) {
         "@context" : "https://labs.eventnotifications.net/contexts/eventlog.jsonld",
         "id": `${process.env.EVENTLOG_BASEURL}${req.url}`, 
         "type": "EventLog",
-        "artifact": artifact,
+        "artifact": "",
         "member": []
     };
 
@@ -42,6 +42,10 @@ async function handle(req,res,options) {
         const event = events[i];
         const context = await cache.getCacheContext(event.id, { name: cacheName });
         const checksum = md5(makeEvent(event));
+
+        if (i == 0) {
+            traceLog['artifact'] = event.object.id;
+        }
 
         traceLog.member.push({
             id: `${process.env.EVENTLOG_BASEURL}${parsedUrl.pathname}/${event.id}` ,
@@ -93,14 +97,14 @@ async function resolveEvent(id,param) {
     }
 }
 
-async function resolveEventLog(url,param) {
-    logger.debug(`resolveEventLog(${url},${param})`);
+async function resolveEventLog(id,param) {
+    logger.debug(`resolveEventLog(${id},${param})`);
 
     try {
         let latest;
 
         // Add here a hack to find the latest trace based on a metadata offer
-        if (url === 'latest') {
+        if (id === 'latest') {
             const events = await cache.listCache('','original=NULL',param);
         
             if (events.length == 0) {
@@ -110,13 +114,7 @@ async function resolveEventLog(url,param) {
             latest = events.at(-1);
         }
         else {
-            const events = await cache.listCache(`object.id=${url}`,'',param);
-
-            if (events.length == 0) {
-                return null;
-            }
-
-            latest = events.at(-1);
+            latest = id;
         }
 
         if (! latest) {
